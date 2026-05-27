@@ -1,0 +1,17 @@
+{
+  "name": "repro-nuxtjs-sitemap-discover-images-double-encode",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "postinstall": "nuxi prepare",
+    "generate": "nuxi generate",
+    "preview": "nuxi preview"
+  },
+  "devDependencies": {
+    "@nuxt/image": "2.0.0",
+    "@nuxtjs/sitemap": "8.0.15",
+    "nuxt": "4.4.6",
+    "typescript": "~5.9.0",
+    "vue-tsc": "~3.0.0"
+  }
+}
