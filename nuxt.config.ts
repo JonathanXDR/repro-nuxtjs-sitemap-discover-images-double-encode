@@ -1,22 +1,17 @@
 export default defineNuxtConfig({
   compatibilityDate: '2026-03-21',
-  modules: ['@nuxt/image', '@nuxtjs/sitemap'],
+  modules: ['@nuxtjs/sitemap'],
 
   site: {
     url: 'https://example.com',
   },
 
-  // Force vercel preset so @nuxt/image emits `/_vercel/image?url=…&w=…&q=…`
-  // URLs (which are already HTML-entity-encoded in the prerendered HTML).
-  nitro: {
-    preset: 'vercel',
-  },
-
   sitemap: {
+    // Single static sitemap.xml prerendered at build time. Mirrors how
+    // production sites with prerendered Vercel image URLs are configured.
     sitemaps: false,
     zeroRuntime: true,
-    // `discoverImages` is on by default. Turning it OFF avoids the bug.
-    // Leaving it ON (this repro's default) produces the double-encoded URLs.
-    // discoverImages: false, // ← workaround
+    // `discoverImages: true` (the default) is what triggers the bug.
+    // Setting it to `false` is the only user-side workaround.
   },
 })

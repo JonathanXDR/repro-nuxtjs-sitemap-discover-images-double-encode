@@ -1,18 +1,25 @@
 <template>
-  <div>
+  <main>
     <h1>repro: @nuxtjs/sitemap discoverImages double-encodes</h1>
+    <p>
+      The image URL below mirrors what <code>@nuxt/image</code>'s vercel
+      provider emits in prerendered production HTML
+      (<code>/_vercel/image?url=…&amp;w=…&amp;q=…</code>). Vue HTML-encodes
+      the <code>&amp;</code> in <code>src</code> on render, so the
+      prerendered file contains <code>&amp;amp;w=…</code>. The bug is what
+      the sitemap module does with that <code>src</code> next.
+    </p>
     <!--
-      NuxtImg under the vercel provider emits something like:
-        <img src="/_vercel/image?url=%2Fimg%2Fportrait.webp&amp;w=768&amp;q=80">
-      The src is already HTML-entity-encoded. discoverImages re-runs it
-      through xmlEscape, producing &amp;amp;w=768 in sitemap.xml.
+      Hand-written so the repro doesn't depend on @nuxt/image. The literal
+      `&` in the source becomes `&amp;` in the rendered HTML, which is what
+      ultrahtml's attribute parser then reads back from the prerendered
+      file — without decoding entities.
     -->
-    <NuxtImg
-      src="/img/portrait.webp"
+    <img
+      src="/_vercel/image?url=%2Fimg%2Fportrait.webp&w=768&q=80"
       width="768"
       height="768"
-      quality="80"
       alt="portrait"
-    />
-  </div>
+    >
+  </main>
 </template>
