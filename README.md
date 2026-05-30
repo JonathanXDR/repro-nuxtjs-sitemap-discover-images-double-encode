@@ -42,7 +42,7 @@ The discovered image URL is encoded exactly once:
 
 ## Actual behaviour
 
-Two layers of entity encoding (`&amp;amp;`) — search engines fetch the
+Two layers of entity encoding (`&amp;amp;`). Search engines fetch the
 literal `&amp;` and Vercel's image optimizer returns a 400.
 
 ## Root cause
@@ -67,8 +67,8 @@ function parseHtmlExtractSitemapMeta(html, options) {
 
 The HTML parser used here is `ultrahtml`, whose attribute parser
 (`node_modules/ultrahtml/dist/index.mjs`) reads attribute values
-*verbatim* — entities such as `&amp;` are not decoded. So
-`attrs.src === '…&amp;w=…'` (literal `&amp;`) is added to the set.
+*verbatim*, and entities such as `&amp;` are not decoded. So
+`attrs.src === '...&amp;w=...'` (literal `&amp;`) is added to the set.
 
 Serialisation
 (`node_modules/@nuxtjs/sitemap/dist/runtime/server/sitemap/builder/xml.js:33`):
@@ -105,14 +105,14 @@ to other sitemap consumers.
 
 ## Related upstream activity
 
-- PR [`nuxt-modules/sitemap#610`](https://github.com/nuxt-modules/sitemap/pull/610) —
+- PR [`nuxt-modules/sitemap#610`](https://github.com/nuxt-modules/sitemap/pull/610),
   *"fix: escape all user-provided XML fields"* (merged 2026-04-25). Adjacent
-  area but the opposite direction: it added missing escapes for
+  area but the opposite direction. It added missing escapes for
   `<lastmod>`, `<changefreq>`, and several `<video:*>` fields. The
   discoverImages double encoding is *over*-escaping rather than
   *under*-escaping, so #610 doesn't address it.
-- Issue [`#238`](https://github.com/nuxt-modules/sitemap/issues/238) —
-  *"Disabling image autodiscovery"* — the workaround above is the
+- Issue [`#238`](https://github.com/nuxt-modules/sitemap/issues/238),
+  *"Disabling image autodiscovery"*. The workaround above is the
   long-standing answer.
 
 No existing issue or PR addresses the entity-decoding step at the time
