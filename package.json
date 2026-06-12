@@ -9,7 +9,7 @@
     "inspect:sitemap": "node -e \"const fs=require('node:fs');const p='.output/public/sitemap.xml';if(!fs.existsSync(p)){console.error('Run \\'npm run generate\\' first.');process.exit(1)}const m=fs.readFileSync(p,'utf8').match(/<image:loc>[^<]+<\\/image:loc>/g);console.log(m?m.join('\\n'):'(no image:loc entries found)')\""
   },
   "devDependencies": {
-    "@nuxtjs/sitemap": "8.0.15",
+    "@nuxtjs/sitemap": "8.2.1",
     "nuxt": "4.4.6",
     "typescript": "6.0.3",
     "vue-tsc": "3.3.2"
