@@ -1,4 +1,4 @@
-# Repro: `@nuxtjs/sitemap@8.0.15` `discoverImages` double-encodes already-entity-encoded image URLs
+# Repro: `@nuxtjs/sitemap@8.2.1` `discoverImages` double-encodes already-entity-encoded image URLs
 
 Minimal Nuxt 4 project showing that `discoverImages: true` (the default)
 re-runs already-HTML-entity-encoded `<img src>` values through
@@ -121,6 +121,6 @@ of writing.
 ## Environment
 
 - `nuxt@4.4.6`
-- `@nuxtjs/sitemap@8.0.15`
+- `@nuxtjs/sitemap@8.2.1`
 - `typescript@6.0.3`
 - Node.js ≥ 20.19
