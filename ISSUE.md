@@ -22,8 +22,6 @@ A consumer that decodes the sitemap once gets `...webp&amp;w=768&amp;q=80`, so t
 
 https://stackblitz.com/github/JonathanXDR/repro-nuxtjs-sitemap-discover-images-double-encode
 
-The StackBlitz start command runs `npm run generate && npm run inspect:sitemap`, which prints the double-encoded `<image:loc>` directly in the terminal.
-
 ## 🌈 Expected behavior
 
 The discovered image URL is encoded exactly once, matching what the page actually links to:
